@@ -45,7 +45,6 @@ public class FileUploadController {
 	@Inject
 	private FileUploadService fileService;
 
-	
 	String AWS_BUCKET_NAME = "travie";
 	String AWS_ACCESS_KEY = "AKIAJN2LH36EY7SNAHVQ";
 	String AWS_SECRETKEY = "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";
@@ -57,20 +56,29 @@ public class FileUploadController {
 	//  폴더 생성 체크
 	public boolean makeDirCheck(String m_id , String dirName){
 		try {
-			File userDir = new File(ImagicUtil.path, m_id);
-			File userCreateDir = new File(ImagicUtil.path+ m_id, dirName);
+//			File userDir = new File(ImagicUtil.path, m_id);
+			
+//			File userCreateDir = new File(ImagicUtil.path+ m_id, dirName);
 			// user id 와 같은 이름의 폴더 생성 체크
-			if (!userDir.exists()) {
-				userDir.mkdir();
+//			if (!userDir.exists()) {
+//				userDir.mkdir();
+//			}
+			if (AwsUtil.createS3Folder(AWS_BUCKET_NAME, m_id, null, s3)) {
+				if (!AwsUtil.createS3Folder(AWS_BUCKET_NAME, m_id, dirName, s3)) 
+					return false;
+			} else {
+				return false;
 			}
+			
+			return true;
 			// user가 생성하려는 폴더에 대한체크
-			if (!userCreateDir.exists()) {
-				userCreateDir.mkdir();
-			}
+//			if (!userCreateDir.exists()) {
+//				userCreateDir.mkdir();
+//			}
 		} catch (Exception e) {
 			return false;	
 		}
-		return true;
+//		return true;
 	}
 
 	// 파일 업로드창을 주소를 쳐서 들어온 경우 처리
@@ -116,7 +124,7 @@ public class FileUploadController {
 			if (fileService.isDir(file)==0) { // DB에 해당 폴더가 존재하지 않으면 0을 반환
 				// 폴더 생성이 성공하면
 //				if(makeDirCheck(m_id, dirName)) {
-				if(AwsUtil.createS3Folder(AWS_BUCKET_NAME, m_id + AwsUtil.SUFFIX + dirName, s3)){
+				if(AwsUtil.createS3Folder(AWS_BUCKET_NAME, m_id,  dirName, s3)){
 					// db에 디렉토리 내용 넣기
 					int result=fileService.createDir(file);
 					if(result>0){
@@ -196,7 +204,7 @@ public class FileUploadController {
 			// DB에서 폴더명을 삭제하고 그에 해당하는 Image table 파일들을 삭제했다면
 			if (fileService.deleteDir(file)==1) {   
 //				if (ImagicUtil.deleteDir(ImagicUtil.path+m_id+"/"+file.getDirName())){
-				if (AwsUtil.deleteS3Folder(AWS_BUCKET_NAME, m_id+AwsUtil.SUFFIX+file.getDirName() + AwsUtil.SUFFIX, s3)){
+				if (AwsUtil.deleteS3Folder(AWS_BUCKET_NAME, m_id, file.getDirName(), s3)){
 					pw.print("deleteDirSuccess");  // DB, FileSystem 동시에 삭제 성공
 					pw.flush();
 				} else {
