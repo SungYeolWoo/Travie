@@ -111,7 +111,6 @@ $(document).ready(function() {
 		});
 		event.preventDefault();
 		function onSuccess(data) {
-			alert("logout");
 			window.location.href="/";  // 정상적으로 로그인시 index 페이지 다시로딩
 		}
 		function onError(data, status) {
