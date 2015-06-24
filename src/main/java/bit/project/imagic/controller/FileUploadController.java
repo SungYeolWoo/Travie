@@ -26,10 +26,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.sun.imageio.plugins.common.ImageUtil;
+
 import bit.project.imagic.service.FileUploadService;
 import bit.project.imagic.util.ImagicUtil;
 import bit.project.imagic.vo.FileVO;
 import bit.project.imagic.vo.MemberVO;
+import bit.project.imagic.util.AwsUtil;
 
 @Controller
 @SessionAttributes("member")
@@ -38,6 +45,15 @@ public class FileUploadController {
 	@Inject
 	private FileUploadService fileService;
 
+	
+	String AWS_BUCKET_NAME = "travie";
+	String AWS_ACCESS_KEY = "AKIAJN2LH36EY7SNAHVQ";
+	String AWS_SECRETKEY = "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";
+	
+	AWSCredentials credentials = new BasicAWSCredentials(AWS_ACCESS_KEY,AWS_SECRETKEY);
+	
+	AmazonS3Client s3 = new AmazonS3Client(credentials);
+	
 	//  폴더 생성 체크
 	public boolean makeDirCheck(String m_id , String dirName){
 		try {
@@ -99,7 +115,8 @@ public class FileUploadController {
 		try {
 			if (fileService.isDir(file)==0) { // DB에 해당 폴더가 존재하지 않으면 0을 반환
 				// 폴더 생성이 성공하면
-				if(makeDirCheck(m_id, dirName)) {
+//				if(makeDirCheck(m_id, dirName)) {
+				if(AwsUtil.createS3Folder(AWS_BUCKET_NAME, m_id + AwsUtil.SUFFIX + dirName, s3)){
 					// db에 디렉토리 내용 넣기
 					int result=fileService.createDir(file);
 					if(result>0){
@@ -131,30 +148,37 @@ public class FileUploadController {
 		file.setM_id(m_id);
 		file.setDirName(newDirName);
 		PrintWriter pw = response.getWriter();
-
+		String result = "false";
 		try {
 			// 새로만들 디렉토리가 있는지부터 검사
 			if (fileService.isDir(file) == 0) { // DB 에 해당폴더 없으면 0 반환
 				file.setDirName(null);
 				file.setDirName(oldDirName);
 				file.setDirRename(newDirName);
-
-				if (fileService.renameDir(file) == 1) {  // DB에 이름 변경하면 1 반환
-					// ajax에게 값을 넘겨주기 위해서
-					boolean result = ImagicUtil.renameDir(ImagicUtil.path + m_id, oldDirName, newDirName);
-					pw.print(result);
-					pw.flush();
+				
+				result = "true";
+				
+//				boolean rename = ImagicUtil.renameDir(ImagicUtil.path + m_id, oldDirName, newDirName);
+				boolean rename = AwsUtil. renameS3Folder(AWS_BUCKET_NAME, m_id, oldDirName, newDirName, s3);
+				
+				if(rename == false) {
+					result = "file error";
+				} else {
+					if (fileService.renameDir(file) == 1) {  // DB에 이름 변경하면 1 반환
+						// ajax에게 값을 넘겨주기 위해서
+					} else {
+						result = "db error";
+					}	
 				}
-			} else {
-			pw.print("false");
-			pw.flush();
-			}
+			} 
+			pw.print(result);
 		} catch (NullPointerException e) {
 			pw.print("SessionNullEx"); // // session 검사실패 세션없음
-			pw.flush();
 			e.printStackTrace();
+		} finally {
+			pw.flush();
+			pw.close();	
 		}
-		pw.close();
 	}
 
 	// 폴더 삭제를 처리를 위한 컨트롤러
@@ -171,7 +195,8 @@ public class FileUploadController {
 
 			// DB에서 폴더명을 삭제하고 그에 해당하는 Image table 파일들을 삭제했다면
 			if (fileService.deleteDir(file)==1) {   
-				if (ImagicUtil.deleteDir(ImagicUtil.path+m_id+"/"+file.getDirName())){
+//				if (ImagicUtil.deleteDir(ImagicUtil.path+m_id+"/"+file.getDirName())){
+				if (AwsUtil.deleteS3Folder(AWS_BUCKET_NAME, m_id+AwsUtil.SUFFIX+file.getDirName() + AwsUtil.SUFFIX, s3)){
 					pw.print("deleteDirSuccess");  // DB, FileSystem 동시에 삭제 성공
 					pw.flush();
 				} else {

@@ -7,6 +7,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+
 import bit.project.imagic.vo.MemberVO;
 
 /**
@@ -15,7 +20,11 @@ import bit.project.imagic.vo.MemberVO;
  *
  */
 public class ImagicUtil {
-	public static String path = "/Users/ProgrammingPearls/Documents/Upload/";
+	
+	
+	
+	
+	public static String path = "/Documents/Upload/";
 //	public static String path = "d:/down/upload/";
 //	public static String path = "/home/imagic/imagic/";
 	

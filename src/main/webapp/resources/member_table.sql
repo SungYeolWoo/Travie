@@ -3,7 +3,7 @@ CREATE TABLE `member` (
   `m_pw` char(41) NOT NULL,
   `m_name` varchar(45) NOT NULL,
   `m_email` varchar(100) NOT NULL,
-  `m_regDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `m_regDate` datetime NOT NULL,
   PRIMARY KEY (`m_id`),
   UNIQUE KEY `m_id_UNIQUE` (`m_id`),
   UNIQUE KEY `m_email_UNIQUE` (`m_email`)

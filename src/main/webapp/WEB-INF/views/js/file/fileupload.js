@@ -102,12 +102,16 @@ $(document).ready(function() {
 				dirElement.childNodes[0].classList.add("clicked");
 			}else if(data=="false"){
 				alert("이미 존재하는 폴더명입니다.");
+			}else if(data="db error") {
+				alert("DB 변경 실패!");
+			}else if(data="file error") {
+				alert("저장경로 변경 실패");
 			}else if(data=="SessionNullEx"){  // session 검사실패 세션없음
 				alert("세션이 만료 되었습니다");
 			}   
 		}
 		function onError(data, status) {
-			alert("이름 변경하기가 실패하였습니다.(응답없음)");
+			alert("이름 변경하기가 실패하였습니다.");
 		}
 	});
 
