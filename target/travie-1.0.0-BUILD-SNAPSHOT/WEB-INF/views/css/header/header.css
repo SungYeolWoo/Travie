@@ -1,0 +1,101 @@
+* {
+	font-family: 'Nanum Gothic', 'Titillium Web', sans-serif!important;
+	text-decoration: none!important;
+}
+
+.navbar-brand{
+	font-size: 18px;
+}
+
+/* 12월 30일 수정 CSS*/
+.ellipsis { width: 60%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+
+
+.heading {
+            font-weight: 300;
+            font-size: 50px;
+        }
+.colorgraph {
+            margin: 80px 0;
+            height: 5px;
+            background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4)
+}
+
+.colorgraph.divider{
+	margin: 40px 0;
+}
+
+.glyphicon {
+	margin-right: 7px;
+}
+
+.signCover {
+	position: relative;
+	height: 44px;
+}
+
+.signCover>input {
+	font-size: 16px;
+	height: auto;
+	padding: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	position: absolute;
+}
+
+.signCover>span {
+	font-size: 12px;
+	position: absolute;
+	right: 5px;
+	top : 14px;
+	color : red;
+}
+
+.form-control.top {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.form-control.middle {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+
+@media screen and (max-width : 767px){
+	
+	.ellipsis { width: 250px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+	
+	.signCover {
+	position: relative;
+	height: 44px;
+}
+	.signCover>input {
+		font-size: 16px;
+		height: auto;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		position: absolute;
+	}
+	
+	.signCover>span {
+		font-size: 7px;
+		position: absolute;
+		right: 5px;
+		top : 18px;
+		color : red;
+/* 		display: table-row; */
+	}
+}
+
+/* 12월 30일 수정 CSS*/
+@media screen and (min-width:992px) and (max-width:1099px) {
+	.ellipsis { width: 50px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+}

@@ -1,0 +1,193 @@
+/* edit CSS */
+#editBody{
+	margin-top: 20px;
+}
+
+.drawArea {
+	margin-top : 20px;
+	display: flex;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	-ms-flex-pack : center;
+	justify-content: center;
+	position : relative;
+}
+
+#drawzone {
+	min-width: 840px;
+	height: 540px;
+	display: table-cell;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 5px solid #e3e3e3;
+	border-radius: 4px;
+}
+
+/* #draw {
+	display: inline-block;
+	margin: 0 auto;
+} */
+
+#thumbnailzone {
+	
+	margin-top: 30px;
+	margin-bottom: 10px;
+	width: 100%;
+	height: 117px;
+	overflow: hidden;
+	text-align:center;
+}
+
+#thumbNail {
+	display: inline-block;
+}
+
+.tv-preview {
+	float: left;
+	margin-right: 10px;
+}
+
+.tv-preview.active {
+	outline: 5px auto #347DEF;
+	outline-offset: -1px;
+}
+
+[data-tv-thumbnail] {
+	display: inline-block;
+	display: block;
+	padding: 4px;
+	background-color: #ffffff;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	-webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
+}
+
+.glyphicon.glyphicon-chevron-left {
+    font-size: 30px;
+}
+.glyphicon.glyphicon-chevron-right {
+    font-size: 30px;
+}
+
+.thumbnailLeft, .thumbnailRight {
+	width:30px;
+	display: block;
+	float:left;
+	height:110px;
+}
+ .thumbnailRight {
+ 	float:right;
+ }
+.thumbnailLeft > a, .thumbnailRight> a {
+	top : 40px;
+}
+
+#saveCanvas {
+	margin-right : 5px;
+}
+
+
+.FilterName {
+  width: 190px;
+  margin: 0 auto;
+}
+
+.FilterValue {
+	margin-left:2px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  width: 70%;
+  height: 5px;
+  margin: 0;
+  border: none;
+  padding: 1px 2px;
+  border-radius: 14px;
+  background: #c0c0c0;
+  outline: none; /* no focus outline */
+}
+
+input[type="range"]::-moz-range-track {
+  border: inherit;
+  background: transparent;
+  
+}
+
+input[type="range"]::-ms-track {
+  border: inherit;
+  color: transparent; /* don't drawn vertical reference line */
+  background: transparent;
+  height: 10px;
+}
+
+input[type="range"]::-ms-fill-lower,
+input[type="range"]::-ms-fill-upper {
+  background: transparent;
+  border-radius: 10px;
+}
+
+input[type="range"]::-ms-tooltip {
+  display: none;
+}
+
+/* thumb */
+
+input[type="range"]::-webkit-slider-thumb {
+/*   -webkit-appearance: none; */
+/*   width: 40px; */
+/*   height: 18px; */
+/*   border: none; */
+/*   border-radius: 12px; */
+/*   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #529de1), color-stop(100%, #245e8f)); android <= 2.2 */
+/*   background-image: -webkit-linear-gradient(top , #529de1 0, #245e8f 100%); older mobile safari and android > 2.2; */
+/*   background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); W3C */
+  
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #A5BD64;
+    margin-top: -2px;
+  
+}
+input[type="range"]::-moz-range-thumb {
+ 	border: none; 
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #A5BD64;
+}
+
+input[type="range"]::-ms-thumb {
+ 	border: none; 
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #A5BD64;
+}
+
+
+span.glyphicon-circle-arrow-up, .glyphicon-circle-arrow-left, .glyphicon-circle-arrow-right, .glyphicon-circle-arrow-down{
+    font-size: 3em;
+    color: #5bc0de;
+}
+span.glyphicon-plus-sign {
+	 font-size: 3em;
+	 color: #357ebd;
+}
+
+#textTool{
+	position: absolute; 
+	width:200px; 
+	height:100px; 
+	right:0; 
+	top:0;
+}
+
+
